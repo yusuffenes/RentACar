@@ -21,9 +21,11 @@ public class EfCarDal :EfEntityRepositoryBase<Car,CarContext>, ICarDal
                     on x.BrandId equals b.Id
                 select new CarDetailDto
                 {
-                    CarId = x.Id,
+                    Id = x.Id,
                     BrandName = b.Name,
                     ColorName = c.Name,
+                    ModelYear = x.ModelYear,
+                    Description = x.Description,
                     DailyPrice = x.DailyPrice
                 };
             return result.ToList();

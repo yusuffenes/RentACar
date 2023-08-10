@@ -22,10 +22,10 @@ public class CarManager : ICarService
     {
         _carDal = carDal;
     }
-    [SecuredOperation("car.listed")]
+    
     public IDataResult<List<Car>> GetAll()
     {
-        if (System.DateTime.Now.Hour == 12)
+        if (System.DateTime.Now.Hour == 20)
         {
             return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
         }

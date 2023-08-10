@@ -16,6 +16,18 @@ namespace WebAPI.Controllers
             _rentalService = rentalService;
         }
 
+
+        [HttpGet("getrantaldetail")]
+        public IActionResult GetRentalDetail()
+        {
+            var result = _rentalService.GetRentalDetail();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
