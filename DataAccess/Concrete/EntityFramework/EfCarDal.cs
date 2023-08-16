@@ -14,21 +14,129 @@ public class EfCarDal :EfEntityRepositoryBase<Car,CarContext>, ICarDal
     {
         using (CarContext context = new CarContext())
         {
-            var result = from x in context.Cars
-                join c in context.Colors
-                    on x.ColorId equals c.Id
+            var result = from car in context.Cars
                 join b in context.Brands
-                    on x.BrandId equals b.Id
+                    on car.BrandId equals b.Id
+                join c in context.Colors
+                    on car.ColorId equals c.Id
                 select new CarDetailDto
                 {
-                    Id = x.Id,
+                    Id = car.Id,
+                    BrandId = b.Id,
+                    ColorId = c.Id,
                     BrandName = b.Name,
                     ColorName = c.Name,
-                    ModelYear = x.ModelYear,
-                    Description = x.Description,
-                    DailyPrice = x.DailyPrice
+                    DailyPrice = car.DailyPrice,
+                    Description = car.Description,
+                    ModelYear = car.ModelYear,
+                    ImageFolder = (from ci in context.CarImages where ci.CarId == car.Id select ci.ImageFolder).FirstOrDefault()
+                };
+                
+            return result.ToList();
+        }
+    }
+
+    
+
+    public List<CarDetailDto> GetCarDetailByColorAndBrandId(int brandId, int colorId)
+    {
+        using (CarContext context = new CarContext())
+        {
+            var result = from car in context.Cars
+                join b in context.Brands
+                    on car.BrandId equals b.Id
+                join c in context.Colors
+                    on car.ColorId equals c.Id
+                where c.Id == colorId && b.Id ==brandId
+                select new CarDetailDto
+                {
+                    Id = car.Id,
+                    BrandName = b.Name,
+                    ColorName = c.Name,
+                    BrandId = b.Id,
+                    ColorId = c.Id,
+                    Description = car.Description,
+                    DailyPrice = car.DailyPrice,
+                    ModelYear = car.ModelYear,
+                    ImageFolder = (from ci in context.CarImages where car.Id == ci.CarId select ci.ImageFolder).FirstOrDefault()
                 };
             return result.ToList();
         }
     }
+    public List<CarDetailDto> GetCarDetailByBrandId(int brandId)
+        {
+            using (CarContext context = new CarContext())
+            {
+                var result = from car in context.Cars
+                             join b in context.Brands
+                             on car.BrandId equals b.Id
+                             join c in context.Colors
+                             on car.ColorId equals c.Id
+                             where b.Id == brandId
+                             select new CarDetailDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = b.Name,
+                                 ColorName = c.Name,
+                                 Description = car.Description,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                                 ImageFolder = (from ci in context.CarImages where car.Id == ci.CarId select ci.ImageFolder).FirstOrDefault() 
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailByCarId(int carId)
+        {
+            using (CarContext context = new CarContext())
+            {
+                var result = from car in context.Cars
+                             join b in context.Brands
+                             on car.BrandId equals b.Id
+                             join c in context.Colors
+                             on car.ColorId equals c.Id
+                             where car.Id == carId
+                             select new CarDetailDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = b.Name,
+                                 ColorName = c.Name,
+                                 BrandId = b.Id,
+                                 ColorId = c.Id,
+                                 Description = car.Description,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                                 ImageFolder = (from ci in context.CarImages where car.Id == ci.CarId select ci.ImageFolder).FirstOrDefault()
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailByColorId(int colorId)
+        {
+            using (CarContext context = new CarContext())
+            {
+                var result = from car in context.Cars
+                    join b in context.Brands
+                        on car.BrandId equals b.Id
+                    join c in context.Colors
+                        on car.ColorId equals c.Id
+                    where c.Id == colorId
+                    select new CarDetailDto
+                    {
+                        Id = car.Id,
+                        BrandId = b.Id,
+                        ColorId = c.Id,
+                        BrandName = b.Name,
+                        ColorName = c.Name,
+                        Description = car.Description,
+                        DailyPrice = car.DailyPrice,
+                        ModelYear = car.ModelYear,
+                        ImageFolder = (from ci in context.CarImages where car.Id == ci.CarId select ci.ImageFolder).FirstOrDefault()
+                    };
+                return result.ToList();
+            }
+        }
 }
+

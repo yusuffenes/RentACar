@@ -81,4 +81,23 @@ public class CarManager : ICarService
         Add(car);
         return null;
     }
+    public IDataResult<List<CarDetailDto>> GetCarDetailByBrandId(int brandId)
+    {
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByBrandId(brandId));
+    }
+
+    public IDataResult<List<CarDetailDto>> GetCarDetailByCarId(int carId)
+    {
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByCarId(carId));
+    }
+
+    public IDataResult<List<CarDetailDto>> GetCarDetailByColorAndBrandId(int brandId, int colorId)
+    {
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByColorAndBrandId(brandId,colorId));
+    }
+
+    public IDataResult<List<CarDetailDto>> GetCarDetailByColorId(int colorId)
+    {
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByColorId(colorId));
+    }
 }

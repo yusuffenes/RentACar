@@ -14,4 +14,8 @@ public interface ICarService
     IResult Update(Car car);
 
     IResult AddTransactionalTest(Car car);
+    IDataResult<List<CarDetailDto>> GetCarDetailByCarId(int carId);
+    IDataResult<List<CarDetailDto>> GetCarDetailByBrandId(int brandId);
+    IDataResult<List<CarDetailDto>> GetCarDetailByColorId(int colorId);
+    IDataResult<List<CarDetailDto>> GetCarDetailByColorAndBrandId(int brandId, int colorId);
 }
