@@ -1,1 +1,1 @@
-Database code =[ https://gist.github.com/yusuffenes/b438177a3006e1127434ce09af6fb1b7()](https://gist.github.com/yusuffenes/b438177a3006e1127434ce09af6fb1b7)https://gist.github.com/yusuffenes/b438177a3006e1127434ce09af6fb1b7
+Database code =https://gist.github.com/yusuffenes/b438177a3006e1127434ce09af6fb1b7
